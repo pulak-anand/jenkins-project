@@ -31,7 +31,7 @@ pipeline {
       steps {
         script {
           withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USER')]){
-            sh "docker login -u pulakanand -p ${DOCKERHUB_KEY}" 
+            sh "docker login -u pulakanand -p ${dockerhub_key}" 
             echo "Logged in to Docker registry"
             sh "docker push pulakanand/jenkins-project:v1"       
           }
