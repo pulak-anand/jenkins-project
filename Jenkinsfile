@@ -41,7 +41,7 @@ pipeline {
     stage('Deploying nginx') {
       steps {
         script {
-          kubeconfig(credentialsId: 'k8s_id', serverUrl: 'https://192.168.49.2:8443') {
+          kubeconfig(credentialsId: 'kuber_key', serverUrl: 'https://192.168.49.2:8443') {
             try {
               sh "kubectl apply -f deployment.yaml"
               echo "Successfully Deployed."
