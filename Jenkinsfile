@@ -58,7 +58,7 @@ pipeline {
       }
     }
   }
-  /*post {
+  post {
     success {
       emailext body: '''$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
           Check console output at $BUILD_URL to view the results.''', 
@@ -71,5 +71,5 @@ pipeline {
           subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!',
           to: 'pulakanand@sigmoidanalytics.com'
     }
-  }*/
+  }
 }
