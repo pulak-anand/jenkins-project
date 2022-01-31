@@ -44,7 +44,7 @@ pipeline {
               sh "kubectl apply -f deployment.yaml"
               echo "Deployment done."
               sh "kubectl get pods"
-              sh "kubectl get deployments
+              sh "kubectl get deployments"
           }   
         }
       }
