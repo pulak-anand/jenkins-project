@@ -6,50 +6,49 @@ pipeline {
     dockerImage = ''
   }
   stages {
-    stage('Cloning Git') {
+    stage('Git clone') {
       steps {
         script {
             withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GITHUB_PASSWORD', usernameVariable: 'GITHUB_USER')])
            {
             sh 'git fetch --all'
-            echo "Repository is Fetched"
           }    
         }
       }
     }
-    stage('Building Image') {
+    stage('Image Building') {
       steps{
         script {
           sh "docker image prune --all"
           sh "docker build -t pulakanand/jenkins-project:v1 ."
           sh "docker run -d --rm pulakanand/jenkins-project:v1"
-          echo "A New Image has been built"
+          echo "New image built"
         }
       }
     }
-    stage('Push image') {
+    stage('Pushing image') {
       steps {
         script {
           withCredentials([string(credentialsId: 'dockerhub_key', variable: 'dockerhub_key')]){
             sh "docker login -u pulakanand -p ${dockerhub_key}" 
-            echo "Logged in to Docker registry"
+            echo "Dockerhub registry logged in"
             sh "docker push pulakanand/jenkins-project:v1"       
           }
         }
       }
     }
-    stage('Deploying nginx') {
+    stage('nginx deployment') {
       steps {
         script {
           kubeconfig(credentialsId: 'kuber_key', serverUrl: 'https://192.168.49.2:8443') {
             try {
               sh "kubectl apply -f deployment.yaml"
-              echo "Successfully Deployed."
+              echo "Deployment done."
               sh "kubectl get pods"
               sh "kubectl get deployments"
               }
             catch (err) {
-              echo "Pods and Deployments are availbale already, listed here."
+              echo "Already listed"
               sh "kubectl get pods"
               sh "kubectl get deployments"
             }
