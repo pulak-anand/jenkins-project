@@ -3,7 +3,7 @@ pipeline {
   environment {
     registry = "pulakanand/jenkins-project"
     registryCredential = 'dockerhub'
-    dockerImage = ''
+    //dockerImage = ''
   }
   stages {
     stage('Git clone') {
