@@ -41,17 +41,10 @@ pipeline {
       steps {
         script {
           kubeconfig(credentialsId: 'kuber_key', serverUrl: 'https://192.168.49.2:8443') {
-            try {
               sh "kubectl apply -f deployment.yaml"
               echo "Deployment done."
               sh "kubectl get pods"
-              sh "kubectl get deployments"
-              }
-            catch (err) {
-              echo "Already listed"
-              sh "kubectl get pods"
-              sh "kubectl get deployments"
-            }
+              sh "kubectl get deployments
           }   
         }
       }
