@@ -6,4 +6,7 @@ ADD app.py .
 
 RUN pip3 install psutil
 
+EXPOSE 5000
+
 CMD ["python" , "app.py"]
+
