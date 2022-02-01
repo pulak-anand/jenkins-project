@@ -21,7 +21,7 @@ pipeline {
         script {
           sh "docker image prune --all"
           sh "docker build -t pulakanand/jenkins-project:v1 ."
-          sh "docker run -d --rm -p 8000:8000 pulakanand/jenkins-project:v1"
+          sh "docker run -d --rm pulakanand/jenkins-project:v1"
           echo "New image built"
         }
       }
