@@ -1,12 +1,6 @@
 FROM python:3.10.2-slim-buster
-
-LABEL maintainer=pulakanand@sigmoidanalytics.com
-
 ADD app.py .
-
 RUN pip3 install psutil
-
-EXPOSE 5000
-
-CMD ["python" , "app.py"]
+EXPOSE 5001
+CMD ["python" , "./app.py"]
 
